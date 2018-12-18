@@ -7,23 +7,32 @@ class ChimneyTabbar extends StatefulWidget {
 
 class _ChimneyTabbarstate extends State<ChimneyTabbar> {
   var _currentIndex = 0;
-  final List<StatefulWidget> mainBodys = [FirstPage(),SecondPage(),ThirdPage()];
+  List<StatefulWidget> _mainBodys;
+  final titles = ["主页", "分类", "我的"];
+
   @override
   Widget build(BuildContext context) {
+    _mainBodys = [
+    FirstPage(title: titles[0],),
+    SecondPage(),
+    ThirdPage()
+  ];
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         items: buildBottomNavigationBarItems(),
         currentIndex: _currentIndex,
         onTap: _tabbarTapped,
       ),
-      body: mainBodys[_currentIndex],
+      body: _mainBodys[_currentIndex],
     );
   }
 
   @override
-    void initState() {
-      super.initState();
-    }
+  void initState() {
+  
+    super.initState();
+  
+  }
 
   void _tabbarTapped(index) {
     setState(() {
@@ -32,14 +41,14 @@ class _ChimneyTabbarstate extends State<ChimneyTabbar> {
   }
 
   List<BottomNavigationBarItem> buildBottomNavigationBarItems() {
-    final titles = ["主页", "分类", "我的"];
     final icons = [Icons.access_alarm, Icons.access_time, Icons.account_box];
     var list = List<BottomNavigationBarItem>();
     for (var i = 0; i < titles.length; i++) {
       final item = BottomNavigationBarItem(
         title: Text(
           titles[i],
-          style: TextStyle(color: _currentIndex == i ? Colors.blue: Colors.grey),
+          style:
+              TextStyle(color: _currentIndex == i ? Colors.blue : Colors.grey),
         ),
         icon: Icon(icons[i]),
       );

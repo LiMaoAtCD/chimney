@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class FirstPage extends StatefulWidget {
+  FirstPage({this.title}): super(key: UniqueKey());
+  final String title;
   _FirstPageState createState() => _FirstPageState();
 }
 
@@ -10,9 +12,9 @@ class _FirstPageState extends State<FirstPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          '首页',
+          widget.title,
           style: TextStyle(
-            color: Theme.of(context).primaryColor,
+            color: Colors.white,
           ),
         ),
       ),
