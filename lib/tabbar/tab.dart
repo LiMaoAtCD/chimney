@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:chimney/pages.dart';
+import 'package:chimney/firstpage/firstpage.dart';
+import 'package:chimney/second/second.dart';
+import 'package:chimney/third/third.dart';
 
 class ChimneyTabbar extends StatefulWidget {
   _ChimneyTabbarstate createState() => _ChimneyTabbarstate();

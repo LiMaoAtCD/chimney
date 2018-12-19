@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:chimney/tab.dart';
+import 'package:chimney/tabbar/tab.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
