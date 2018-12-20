@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'dart:async';
+import 'package:chimney/detail/detail.dart';
+import 'package:chimney/detail/image.dart';
 
 class FirstPage extends StatefulWidget {
   FirstPage({this.title}) : super(key: UniqueKey());
@@ -7,12 +10,19 @@ class FirstPage extends StatefulWidget {
   _FirstPageState createState() => _FirstPageState();
 }
 
-class _FirstPageState extends State<FirstPage> with AutomaticKeepAliveClientMixin {
+class _FirstPageState extends State<FirstPage>
+    with AutomaticKeepAliveClientMixin {
+  List<String> _items = [];
+
   @override
   void initState() {
     super.initState();
     // fetchData();
-    print(" first initState");
+    Timer(Duration(seconds: 2), () {
+      print("timer is fire");
+      _items = ["image", "2", "3", "4", "5"];
+      setState(() {});
+    });
   }
 
   Future fetchData() async {
@@ -52,15 +62,39 @@ class _FirstPageState extends State<FirstPage> with AutomaticKeepAliveClientMixi
           ),
         ),
       ),
-      body: Container(
-        color: Colors.red,
+      body: ListView.builder(
+        itemCount: _items.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(
+              _items[index],
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: 16,
+              ),
+            ),
+            onTap: () {
+              print(index);
+              if (index == 0) {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return ImageWidget();
+                  },
+                ));
+              } else {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return Detail();
+                  },
+                ));
+              }
+            },
+          );
+        },
       ),
     );
   }
 
   @override
   bool get wantKeepAlive => true;
-
 }
-
-
