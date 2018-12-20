@@ -3,7 +3,7 @@ class ThirdPage extends StatefulWidget {
   _ThirdPageState createState() => _ThirdPageState();
 }
 
-class _ThirdPageState extends State<ThirdPage> {
+class _ThirdPageState extends State<ThirdPage> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -12,4 +12,14 @@ class _ThirdPageState extends State<ThirdPage> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+    void initState() {
+      // TODO: implement initState
+      super.initState();
+      print('third init');
+    }
 }
