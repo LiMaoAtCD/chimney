@@ -7,11 +7,12 @@ class FirstPage extends StatefulWidget {
   _FirstPageState createState() => _FirstPageState();
 }
 
-class _FirstPageState extends State<FirstPage> {
+class _FirstPageState extends State<FirstPage> with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     super.initState();
-    fetchData();
+    // fetchData();
+    print(" first initState");
   }
 
   Future fetchData() async {
@@ -33,12 +34,10 @@ class _FirstPageState extends State<FirstPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    print("didChangeDependencies");
   }
 
   @override
   void dispose() {
-    print('dispose');
     super.dispose();
   }
 
@@ -58,6 +57,10 @@ class _FirstPageState extends State<FirstPage> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
+
 }
 
 

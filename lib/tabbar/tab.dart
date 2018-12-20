@@ -11,35 +11,45 @@ class _ChimneyTabbarstate extends State<ChimneyTabbar> {
   var _currentIndex = 0;
   List<StatefulWidget> _mainBodys;
   final titles = ["主页", "分类", "我的"];
+  PageController _pageController;
 
   @override
   Widget build(BuildContext context) {
-    _mainBodys = [
-    FirstPage(title: titles[0],),
-    SecondPage(),
-    ThirdPage()
-  ];
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         items: buildBottomNavigationBarItems(),
         currentIndex: _currentIndex,
-        onTap: _tabbarTapped,
+        onTap: (index) {
+          print('bottomNavigationBar click');
+          setState(() {
+            this._currentIndex = index;
+          });
+          this._pageController.jumpToPage(_currentIndex);
+        },
       ),
-      body: _mainBodys[_currentIndex],
+      body: PageView(
+        children: _mainBodys,
+        controller: _pageController,
+        onPageChanged: (index) {
+          setState(() {
+            this._currentIndex = index;
+          });
+        },
+      ),
     );
   }
 
   @override
   void initState() {
-  
     super.initState();
-  
-  }
-
-  void _tabbarTapped(index) {
-    setState(() {
-      _currentIndex = index;
-    });
+    _pageController = PageController();
+    _mainBodys = [
+      FirstPage(
+        title: titles[0],
+      ),
+      SecondPage(),
+      ThirdPage()
+    ];
   }
 
   List<BottomNavigationBarItem> buildBottomNavigationBarItems() {
